@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>abo7ger - مترجم متعدد اللغات</title>
+    <style>
+        body { font-family: Arial, sans-serif; direction: rtl; padding: 20px; background: #f0f0f0; }
+        textarea { width: 100%; height: 150px; font-size: 18px; }
+        select, button { font-size: 18px; margin-top: 10px; padding: 10px; width: 100%; }
+        .output { margin-top: 20px; background: #fff; padding: 15px; min-height: 100px; font-size: 20px; }
+    </style>
+</head>
+<body>
+    <h1>abo7ger - مترجم متعدد اللغات</h1>
+
+    <form method="POST">
+        <textarea name="text" placeholder="اكتب النص هنا"></textarea><br>
+
+        <label>من:</label>
+        <select name="src_lang">
+            {% for code, name in languages.items() %}
+                <option value="{{ code }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+
+        <label>إلى:</label>
+        <select name="dest_lang">
+            {% for code, name in languages.items() %}
+                <option value="{{ code }}" {% if code == 'ar' %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">ترجم</button>
+    </form>
+
+    <div class="output">
+        {{ translation }}
+    </div>
+</body>
+</html>
